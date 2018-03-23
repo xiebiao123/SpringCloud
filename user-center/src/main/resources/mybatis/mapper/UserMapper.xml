@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.user.center.mapper.UserMapper" >
+    <resultMap id="BaseResultMap" type="com.user.center.domain.UserEntity" >
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName" />
+        <result column="password" property="password" />
+        <result column="status" property="status" javaType="com.user.center.enums.UserStatusEnum"/>
+        <result column="reg_login_ip" property="regLoginIp" />
+        <result column="last_login_ip" property="lastLoginIp" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="del_status" property="delStatus" />
+    </resultMap>
+
+    <sql id="base_column_list" >
+        id, user_name, password, status, reg_login_ip, last_login_ip, create_time, update_time, del_status
+    </sql>
+
+    <select id="listByCondition" resultMap="BaseResultMap"  >
+        SELECT
+        <include refid="base_column_list" />
+        FROM user
+    </select>
+
+    <select id="oneById" parameterType="java.lang.Long" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="base_column_list" />
+        FROM user
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.user.center.domain.UserEntity" >
+        INSERT INTO
+        user
+        (user_name,password,status,create_time)
+        VALUES
+        (#{userName}, #{password}, #{status},#{createTime})
+    </insert>
+
+    <update id="update" parameterType="com.user.center.domain.UserEntity" >
+        UPDATE
+        user
+        <set>
+            <if test="userName != null">,user_name = #{userName}</if>
+            <if test="password != null">,password = #{password}</if>
+        </set>
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long" >
+        DELETE FROM user WHERE id =#{id}
+    </delete>
+</mapper>
