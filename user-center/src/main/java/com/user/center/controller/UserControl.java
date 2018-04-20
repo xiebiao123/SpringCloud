@@ -1,4 +1,4 @@
-package com.user.center.control;
+package com.user.center.controller;
 
 import com.user.center.domain.UserCondition;
 import com.user.center.domain.UserEntity;

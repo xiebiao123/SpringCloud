@@ -1,6 +1,6 @@
 package com.user.center;
 
-import com.user.center.control.UserControl;
+import com.user.center.controller.UserControl;
 import com.user.center.domain.UserCondition;
 import com.user.center.domain.UserEntity;
 import com.user.center.enums.UserStatusEnum;
